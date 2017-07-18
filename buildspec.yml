@@ -3,9 +3,8 @@ version: 0.2
 phases:
   build:
     commands:
-      - ls
-      - pwd
-      - ./gradlew shadowJar
+      - chmod +x gradlew
+      - gradlew shadowJar
 artifacts:
   files:
     - build/libs/*
