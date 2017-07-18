@@ -1,3 +1,6 @@
+package lol.driveways.xbrl.scraper
+
+import lol.driveways.xbrl.scraper.Filing
 import java.text.SimpleDateFormat
 import javax.xml.stream.XMLStreamReader
 
@@ -38,7 +41,8 @@ class StreamProcessor constructor(val reader: XMLStreamReader) {
 
     private fun startElement() {
         when (prettyName()) {
-            tagItem -> {curFiling = Filing()}
+            tagItem -> {curFiling = Filing()
+            }
             tagAccessionNumber -> {curFiling.accessionNumber = reader.elementText}
             tagFormType -> {curFiling.formType = reader.elementText}
             tagFilingDate -> {curFiling.filingDate = feedTimeFormat.parse(reader.elementText).time}

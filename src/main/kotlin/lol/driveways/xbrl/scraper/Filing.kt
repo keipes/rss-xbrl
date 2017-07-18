@@ -1,3 +1,5 @@
+package lol.driveways.xbrl.scraper
+
 import kotlin.reflect.full.memberProperties
 
 class Filing {

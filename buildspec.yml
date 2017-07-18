@@ -1,0 +1,10 @@
+version 1.0
+
+phases:
+  build:
+    commands:
+      - ./gradlew shadowJar
+
+artifacts:
+  files:
+    - build/libs/*
