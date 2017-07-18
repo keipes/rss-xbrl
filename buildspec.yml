@@ -4,7 +4,7 @@ phases:
   build:
     commands:
       - chmod +x gradlew
-      - gradlew shadowJar
+      - ./gradlew shadowJar
 artifacts:
   files:
     - build/libs/*
