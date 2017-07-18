@@ -41,8 +41,7 @@ class StreamProcessor constructor(val reader: XMLStreamReader) {
 
     private fun startElement() {
         when (prettyName()) {
-            tagItem -> {curFiling = Filing()
-            }
+            tagItem -> {curFiling = Filing() }
             tagAccessionNumber -> {curFiling.accessionNumber = reader.elementText}
             tagFormType -> {curFiling.formType = reader.elementText}
             tagFilingDate -> {curFiling.filingDate = feedTimeFormat.parse(reader.elementText).time}
@@ -56,7 +55,7 @@ class StreamProcessor constructor(val reader: XMLStreamReader) {
     private fun endElement() {
         when (prettyName()) {
             tagItem -> {filings.add(curFiling)
-                println(curFiling.toString())
+//                println(curFiling.toString())
             }
         }
     }

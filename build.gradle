@@ -26,4 +26,5 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-reflect"
     testCompile "org.jetbrains.kotlin:kotlin-test"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit"
+    compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.163'
 }
