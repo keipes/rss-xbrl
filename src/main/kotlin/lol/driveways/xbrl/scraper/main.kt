@@ -6,5 +6,5 @@ val log: Logger = Logger.getLogger("main")
 
 fun main(args: Array<String>) {
     val lh = LambdaHandler()
-    lh.handleRequest(0, null)
+    lh.handleRequest("", null)
 }

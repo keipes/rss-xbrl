@@ -17,10 +17,10 @@ class Uploader(queue: BlockingQueue<Filing>, numThreads: Int) {
     val batchQueue = LinkedBlockingQueue<List<Filing>>()
 
     init {
-        val batch = mutableListOf<Filing>()
         sem.acquire()
         // monitor thread
         executor.submit({
+            val batch = mutableListOf<Filing>()
             while(sem.availablePermits() == 0 || !queue.isEmpty()) {
                 val filing = queue.poll(10, TimeUnit.MILLISECONDS)
                 if (filing != null) {
@@ -55,7 +55,8 @@ class Uploader(queue: BlockingQueue<Filing>, numThreads: Int) {
     fun signalInputClosed(context: Context?) {
         sem.release()
         executor.shutdown()
-        val timeout = context?.remainingTimeInMillis?.minus(50) ?: 10000L
-        executor.awaitTermination(timeout as Long, TimeUnit.MILLISECONDS)
+        val timeout: Number = context?.remainingTimeInMillis?.minus(50) ?: 10000
+        executor.awaitTermination(timeout.toLong(), TimeUnit.MILLISECONDS)
+        executor.shutdownNow()
     }
 }
