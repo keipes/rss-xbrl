@@ -1,10 +1,10 @@
 package lol.driveways.xbrl.scraper
 
-import lol.driveways.xbrl.scraper.Filing
 import java.text.SimpleDateFormat
+import java.util.concurrent.BlockingQueue
 import javax.xml.stream.XMLStreamReader
 
-class StreamProcessor constructor(val reader: XMLStreamReader) {
+class StreamReader (val reader: XMLStreamReader, val filingQueue: BlockingQueue<Filing>) {
 
     private val tagItem = "item"
     private val tagAccessionNumber = "edgar:accessionNumber"
@@ -18,7 +18,6 @@ class StreamProcessor constructor(val reader: XMLStreamReader) {
 
     private val feedTimeFormat = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz")
 
-    private val filings: MutableList<Filing> = mutableListOf()
     private var curFiling: Filing = Filing()
 
     fun processAll() {
@@ -54,8 +53,7 @@ class StreamProcessor constructor(val reader: XMLStreamReader) {
     }
     private fun endElement() {
         when (prettyName()) {
-            tagItem -> {filings.add(curFiling)
-//                println(curFiling.toString())
+            tagItem -> {filingQueue.put(curFiling)
             }
         }
     }
